@@ -1,3 +1,22 @@
 <h1>
   {{title}}
 </h1>
+
+<button class="btn btn-primary btn-margin" (click)="auth.login()" *ngIf="!auth.authenticated()">Log In</button>
+<button class="btn btn-primary btn-margin" (click)="auth.logout()" *ngIf="auth.authenticated()">Log Out</button>
+
+<div>
+  <a [routerLink]="['./landing']">Landing</a>
+  <a *ngIf="auth.authenticated()" [routerLink]="['./dashboard']">Dashboard</a>
+  <router-outlet></router-outlet>
+</div>
+
+
+<button (click)="addItem()">add</button>
+<button (click)="removeAll()">remove all</button>
+<ul *ngFor="let item of items | async">
+  <li class="text">
+    {{item | json}}
+  </li>
+  <button (click)="remove(item)">Remove</button>
+</ul>
